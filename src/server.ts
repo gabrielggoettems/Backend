@@ -11,5 +11,11 @@ app.listen(PORT, () => {
 
 app.get("/listarUsuarios/:codigo", (req, res) => {
   const codigo = req.params.codigo;
-  return res.status(200).json({ mensagem: `VOCE DIGITOU ${codigo}` });
+
+  for (const user of usuario)  {
+    if (user.codigo === Number(codigo)) {
+      return res.status(200).json(user);
+    }
+  }
+  return res.status(404).json({ message: "Usuario não encontrado" });
 });
