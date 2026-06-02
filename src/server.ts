@@ -21,10 +21,10 @@ app.use(express.json())
 
 
 app.post("/EfetuarCadastro", (req, res) => {
-  const { user, idade, email, senha, confirmarSenha } = req.body;
+  const { userFrontend, idade, email, senha, confirmarSenha } = req.body;
 
   return res.status(200).json({
-    'user': user,
+    'user': userFrontend,
     'idade': idade,
     'email': email,
     'senha': senha,
@@ -32,12 +32,12 @@ app.post("/EfetuarCadastro", (req, res) => {
   });
 }); 
 app.post("/efetuarLogin", (req, res) => {
-  const { user, senha } = req.body;
+  const { userFrontend, senha } = req.body;
   
-  if(user != null && user == dadosValidos.user && senha != null && senha == dadosValidos.senha) {
+  if(userFrontend != null && userFrontend == dadosValidos.user && senha != null && senha == dadosValidos.senha) {
     return res.status(200).json({ message: "Login bem-sucedido" });
   }
-
+  return res.status(401).json({ message: "Credenciais inválidas" });
   // Lógica de login aqui
 });
 
