@@ -1,5 +1,5 @@
 import express from "express";
-import { usuario } from "./data/Mock";
+import { dadosValidos, usuario } from "./data/Mock";
 import cors from "cors";
 
 const app = express();
@@ -21,18 +21,25 @@ app.use(express.json())
 
 
 app.post("/EfetuarCadastro", (req, res) => {
-  const { nome, idade, email, senha, confirmarSenha } = req.body;
+  const { user, idade, email, senha, confirmarSenha } = req.body;
 
   return res.status(200).json({
-    'nome': nome,
+    'user': user,
     'idade': idade,
     'email': email,
     'senha': senha,
     'confirmarSenha': confirmarSenha,
   });
 }); 
+app.post("/efetuarLogin", (req, res) => {
+  const { user, senha } = req.body;
+  
+  if(user != null && user == dadosValidos.user && senha != null && senha == dadosValidos.senha) {
+    return res.status(200).json({ message: "Login bem-sucedido" });
+  }
 
-
+  // Lógica de login aqui
+});
 
 app.get("/listarUsuarios/:codigo", (req, res) => {
   const codigo = req.params.codigo;

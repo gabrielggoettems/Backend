@@ -35,5 +35,8 @@
     confirmarSenha: "123456",
   },
 ];
-
+export const dadosValidos = {
+  user: "Gabriel",
+  senha: "123456",
+}
 
