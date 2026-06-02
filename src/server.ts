@@ -1,5 +1,5 @@
 import express from "express";
-import { dadosValidos, usuario } from "./data/Mock";
+import { dadosValidosDeLogin, usuario } from "./data/Mock";
 import cors from "cors";
 
 const app = express();
@@ -39,13 +39,15 @@ app.post("/EfetuarCadastro", (req, res) => {
     'confirmarSenha': confirmarSenha,
   });
 }); 
-app.post("/efetuarLogin", (req, res) => {
-  const { userFrontend, senha } = req.body;
+
+
+app.post("/efetuarLogin", (frontend, res) => {
+  const {  user, senha  } = frontend.body;
   
-  if(userFrontend != null && userFrontend == dadosValidos.User && senha != null && senha == dadosValidos.Senha) {
-    return res.status(200).json({ message: "Login bem-sucedido" });
+  if(user != null && user == dadosValidosDeLogin.User && senha != null && senha == dadosValidosDeLogin.Senha) {
+    return res.status(200).json("Login bem-sucedido" );
   }
-  return res.status(401).json({ message: "Credenciais inválidas" });
+  return res.status(401).json( "Credenciais inválidas");
   // Lógica de login aqui
 });
 
@@ -58,9 +60,9 @@ app.post("/EfetuarCadastro", (req, res) => {
 
   if (
     Nome != null &&
-    Nome === dadosValidos.User &&
+    Nome === dadosValidosDeLogin.User &&
     Senha != null &&
-    Senha === dadosValidos.Senha
+    Senha === dadosValidosDeLogin.Senha
   ) {
     return res.status(200).json("Cadastro efetuado com sucesso");
   }

@@ -33,12 +33,9 @@
     confirmarSenha: "123456",
   },
 ];
-export const dadosValidos = {
+export const dadosValidosDeLogin = {
   "User": "Gabriel",
-  "Idade": 16,
-  "Email": "Gabriel@teste.com",
-  "Senha": "123456",
-  "ConfirmarSenha": "123456"
+  "Senha": "123456"
 }
 
 
