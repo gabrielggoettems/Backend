@@ -6,6 +6,14 @@ const app = express();
 
 const PORT = 3000;
 
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  }),
+);
+
 
 app.use(cors({
   origin: "http://localhost:5173",   // seu frontend Vite
@@ -34,7 +42,7 @@ app.post("/EfetuarCadastro", (req, res) => {
 app.post("/efetuarLogin", (req, res) => {
   const { userFrontend, senha } = req.body;
   
-  if(userFrontend != null && userFrontend == dadosValidos.user && senha != null && senha == dadosValidos.senha) {
+  if(userFrontend != null && userFrontend == dadosValidos.User && senha != null && senha == dadosValidos.Senha) {
     return res.status(200).json({ message: "Login bem-sucedido" });
   }
   return res.status(401).json({ message: "Credenciais inválidas" });
@@ -42,14 +50,34 @@ app.post("/efetuarLogin", (req, res) => {
 });
 
 app.get("/listarUsuarios/:codigo", (req, res) => {
-  const codigo = req.params.codigo;
-  
 
-  for (const user of usuario)  {
+app.use(express.json());
+
+app.post("/EfetuarCadastro", (req, res) => {
+  const { Nome, Senha } = req.body;
+
+  if (
+    Nome != null &&
+    Nome === dadosValidos.User &&
+    Senha != null &&
+    Senha === dadosValidos.Senha
+  ) {
+    return res.status(200).json("Cadastro efetuado com sucesso");
+  }
+
+  return res.status(401).json("Dados inválidos");
+});
+
+app.post("/listarUsuarios/:codigo", (req, res) => {
+
+  const codigo = req.params.codigo;
+
+  for (const user of usuario) {
     if (user.codigo === Number(codigo)) {
       return res.status(200).json(user);
     }
   }
+
 
   let encontrei;
   for(let busca of usuario) {
@@ -59,3 +87,13 @@ app.get("/listarUsuarios/:codigo", (req, res) => {
 
   return res.status(404).json({ message: "Usuario não encontrado" });
 }});
+
+  return res.status(404).json({
+    message: "Usuário não encontrado",
+  });
+});
+
+app.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
+});
+

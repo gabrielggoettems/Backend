@@ -34,7 +34,12 @@
   },
 ];
 export const dadosValidos = {
-  user: "Gabriel",
-  senha: "123456",
+  "User": "Gabriel",
+  "Idade": 16,
+  "Email": "Gabriel@teste.com",
+  "Senha": "123456",
+  "ConfirmarSenha": "123456"
 }
+
+
 
