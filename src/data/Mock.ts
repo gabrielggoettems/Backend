@@ -36,4 +36,12 @@
   },
 ];
 
+export const dadosValidos = {
+  "User": "Gabriel",
+  "Idade": 16,
+  "Email": "Gabriel@teste.com",
+  "Senha": "123456",
+  "ConfirmarSenha": "123456"
+}
+
 
