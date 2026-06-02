@@ -6,19 +6,16 @@ const app = express();
 
 const PORT = 3000;
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 8766d70da10bbf553b7b28cc7076b3629633ab41
 app.use(cors({
   origin: "http://localhost:5173",   // seu frontend Vite
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
 }))
-<<<<<<< HEAD
+
 
 app.use(express.json()) 
-=======
+
 
 app.use(express.json()) 
 
@@ -33,10 +30,10 @@ app.post("/EfetuarCadastro", (req, res) => {
     'senha': senha,
     'confirmarSenha': confirmarSenha,
   });
-});
+}); 
 
 
->>>>>>> 8766d70da10bbf553b7b28cc7076b3629633ab41
+
 app.get("/listarUsuarios/:codigo", (req, res) => {
   const codigo = req.params.codigo;
   
