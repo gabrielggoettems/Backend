@@ -7,14 +7,7 @@ import { RetornoInterface } from "./interfaces/Retorno";
 const app = express();
 const PORT = 3000;
 
-app.use(
-  cors({
-    origin: "http://localhost:5173",
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
-
+app.use(cors());
 app.use(express.json());
 
 app.post("/EfetuarCadastro", (req, res) => {
@@ -24,8 +17,6 @@ app.post("/EfetuarCadastro", (req, res) => {
     sucesso: true,
     mensagem: "Cadastro efetuado com sucesso",
   };
-
-  console.log(dados);
 
   return res.status(200).json(retorno);
 });
