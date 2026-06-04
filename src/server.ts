@@ -1,6 +1,8 @@
 import express from "express";
 import { dadosValidosDeLogin, usuario } from "./data/Mock";
 import cors from "cors";
+import { LoginInterface } from "./interfaces/login";
+import { RetornoInterface } from "./interfaces/Retorno";
 
 const app = express();
 
@@ -16,7 +18,7 @@ app.use(
 
 
 app.use(cors({
-  origin: "http://localhost:5173",   // seu frontend Vite
+  origin: "http://localhost:5173",   
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
 }))
@@ -29,10 +31,10 @@ app.use(express.json())
 
 
 app.post("/EfetuarCadastro", (req, res) => {
-  const { userFrontend, idade, email, senha, confirmarSenha } = req.body;
+  const { user, idade, email, senha, confirmarSenha }:LoginInterface = req.body;
 
   return res.status(200).json({
-    'user': userFrontend,
+    'user': user,
     'idade': idade,
     'email': email,
     'senha': senha,
@@ -42,13 +44,18 @@ app.post("/EfetuarCadastro", (req, res) => {
 
 
 app.post("/efetuarLogin", (frontend, res) => {
-  const {  user, senha  } = frontend.body;
+  const { user, senha  }:LoginInterface = frontend.body;
   
+  const retorne:RetornoInterface = {
+    mensagem: "Login bem-sucedido",
+  }
+  return res.status(200).json(retorne);
+
   if(user != null && user == dadosValidosDeLogin.User && senha != null && senha == dadosValidosDeLogin.Senha) {
     return res.status(200).json("Login bem-sucedido" );
   }
   return res.status(401).json( "Credenciais inválidas");
-  // Lógica de login aqui
+  
 });
 
 app.get("/listarUsuarios/:codigo", (req, res) => {
