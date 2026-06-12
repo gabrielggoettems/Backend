@@ -1,4 +1,7 @@
-export interface CadastroInterface {
-  Nome: string;
-  Senha: string;
+export interface InterfaceCadastro {
+    user: string;
+    senha: string;
+    idade: number;
+    email: string;
+    confirmarSenha: string;
 }
