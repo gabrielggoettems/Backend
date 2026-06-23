@@ -1,0 +1,78 @@
+.body {
+    background-color: #1e1e1e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: Arial;
+}
+
+.cadastrar {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    border-radius: 15px;
+    width: 320px;
+    border: 1px solid #4f46e5;
+    background-color: #2e2e2e;
+    align-items: center;
+}
+
+h2 {
+    color: white;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.input {
+    width: 280px;
+    padding: 12px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color:#3a3a3a;
+    box-sizing: border-box;
+    outline: none;
+}
+
+select.input {
+    cursor: pointer;
+}
+
+.botao {
+    width: 280px;
+    padding: 12px;
+    margin-top: 20px;
+    background-color: #4f46e5;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.botao:hover {
+    background-color: #3731a3;
+}
+
+.checkboxGenero {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    margin-top: 15px;
+    width: 280px;
+}
+
+.link {
+    color: #4f46e5;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.aviso {
+    color: #ff4d4d;
+    margin-bottom: 10px;
+    font-size: 14px;
+}

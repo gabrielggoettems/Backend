@@ -1,0 +1,94 @@
+.home {
+  min-height: 100vh;
+  background: #1e1e1e;
+  color: white;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 80px;
+}
+
+.logo {
+  width: 180px;
+}
+
+.header nav {
+  display: flex;
+  gap: 30px;
+}
+
+.header a {
+  color: white;
+  text-decoration: none;
+}
+
+.Acesso {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px;
+}
+
+.Acesso h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.Acesso p {
+  margin-bottom: 20px;
+  color: #bdbdbd;
+}
+
+.AcessoButton {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+  background: #4f46e5;
+}
+.AcessoButton:hover {
+  background: #3b3b98;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  padding: 50px;
+}
+
+.card {
+  background: #2a2a2a;
+  padding: 25px;
+  border-radius: 12px;
+  width: 200px;
+  border: 1px solid #281fca;
+  box-shadow: 0 4px 8px rgba(65, 58, 199, 0.2);
+  transition: background 0.3s ease;
+
+}
+.card:hover {
+  background: #4f46e5;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.informacoes {
+  background: #2a2a2a;
+  padding: 30px;
+  border-radius: 12px;
+  width: 80%;
+  max-width: 1100px;
+  border: 1px solid #281fca;
+  box-shadow: 0 4px 8px rgba(65, 58, 199, 0.2);
+  margin: 50px auto;
+  text-align: center;
+}

@@ -1,0 +1,148 @@
+.cart {
+  color: #111827;
+}
+
+.cart h1 {
+  margin: 0 0 24px;
+  font-size: 34px;
+  letter-spacing: 0;
+}
+
+.empty {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #6b7280;
+  padding: 18px;
+}
+
+.items {
+  display: grid;
+  gap: 16px;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 140px 1fr auto;
+  gap: 18px;
+  align-items: center;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 14px;
+}
+
+.item img {
+  display: block;
+  width: 140px;
+  aspect-ratio: 3 / 2;
+  border-radius: 8px;
+  object-fit: cover;
+  background: #111827;
+}
+
+.info {
+  display: grid;
+  gap: 6px;
+}
+
+.info h2 {
+  margin: 0;
+  color: #111827;
+  font-size: 19px;
+  letter-spacing: 0;
+}
+
+.info p {
+  color: #6b7280;
+}
+
+.info strong {
+  color: #111827;
+}
+
+.actions {
+  display: grid;
+  gap: 10px;
+  justify-items: end;
+}
+
+.quantity {
+  display: grid;
+  grid-template-columns: 38px 44px 38px;
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+}
+
+.quantity button,
+.remove,
+.summary button {
+  border: 0;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.quantity button {
+  height: 38px;
+  background: #f3f4f6;
+  color: #111827;
+  font-size: 18px;
+}
+
+.quantity span {
+  text-align: center;
+  color: #111827;
+  font-weight: 700;
+}
+
+.remove {
+  border-radius: 8px;
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 10px 12px;
+}
+
+.summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 20px;
+  border-top: 1px solid #e5e7eb;
+  padding-top: 20px;
+}
+
+.summary h2 {
+  margin: 0;
+  color: #111827;
+  font-size: 24px;
+  letter-spacing: 0;
+}
+
+.summary button {
+  border-radius: 8px;
+  background: #111827;
+  color: #ffffff;
+  padding: 11px 14px;
+}
+
+@media (max-width: 760px) {
+  .item {
+    grid-template-columns: 1fr;
+  }
+
+  .item img {
+    width: 100%;
+  }
+
+  .actions {
+    justify-items: start;
+  }
+
+  .summary {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
