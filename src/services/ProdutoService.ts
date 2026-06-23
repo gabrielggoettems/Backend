@@ -1,26 +1,24 @@
 import { produtos } from "../data/ProdutoMock";
-import { ProdutoInterface } from "../interfaces/Produtos";
 
-export class ProdutoService{
-
-  buscarTodosProdutos(){
+export class ProdutoService {
+  buscarTodosProdutos() {
     return produtos;
   }
 
-  buscarProdutosPorNome(pesquisa: any){
-    let encontrei: ProdutoInterface | null = null;
+  criarProduto(produto: any) {
+    produtos.push(produto);
+    return produto;
+  }
 
-    for(let p of produtos) {
+  buscarProdutosPorNome(pesquisa: any) {
+    let encontrei = null;
+
+    for (let p of produtos) {
       if (pesquisa == p.nome) {
-
         encontrei = p;
-
       }
-
     }
 
     return [encontrei];
-
-
   }
 }
