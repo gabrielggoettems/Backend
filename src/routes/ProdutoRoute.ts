@@ -7,7 +7,6 @@ import {
 const router = Router();
 
 router.get("/produtos", getListarProdutos);
-
-router.post("/produtos", criarProduto);
+router.post("/saveProdutos", criarProduto);
 
 export default router;
