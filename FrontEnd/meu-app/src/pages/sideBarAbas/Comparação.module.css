@@ -1,0 +1,18 @@
+.alinhar {
+  display: inline-block;
+  inline-size: 0%;
+  gap: 10px;
+}
+
+.alinhar2 {
+  display: block;
+  flex-direction: left;
+  inline-size: 0%;
+  gap: 10px;
+}
+ 
+.botão {
+    font-size: 40px;
+    margin-left: 42.5%;
+    margin-top: 320px;          
+}

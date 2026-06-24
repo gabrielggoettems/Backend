@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { compararProdutos, type ResultadoComparacao } from "../../components/services/comparador";
-
+import style from "./Comparação.module.css";
 
 export default function Comparador() {
   const [produtoA, setProdutoA] = useState("rtx-4060");
@@ -33,26 +33,35 @@ export default function Comparador() {
     <main>
       <h1>Comparador de Peças</h1>
 
+     
+      
+
       <section>
-        <div>
-          <label>Primeira peça</label>
+        <div className={style.alinhar}>
+
+           <label>Primeira peça</label>
+          
           <select value={produtoA} onChange={(e) => setProdutoA(e.target.value)}>
             <option value="rtx-4060">RTX 4060</option>
             <option value="rx-7600">RX 7600</option>
             <option value="gtx-1660">GTX 1660</option>
           </select>
+
         </div>
 
-        <div>
+        <div className={style.alinhar2}>
+
           <label>Segunda peça</label>
+
           <select value={produtoB} onChange={(e) => setProdutoB(e.target.value)}>
             <option value="rtx-4060">RTX 4060</option>
             <option value="rx-7600">RX 7600</option>
             <option value="gtx-1660">GTX 1660</option>
           </select>
+
         </div>
 
-        <button onClick={handleComparar} disabled={loading}>
+        <button onClick={handleComparar} disabled={loading} className={style.botão}>
           {loading ? "Comparando..." : "Comparar"}
         </button>
       </section>
