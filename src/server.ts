@@ -10,7 +10,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use(authRoutes);
-app.use("/api", produtoRoutes);
+app.use("/produto", produtoRoutes);
 
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
