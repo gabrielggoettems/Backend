@@ -3,6 +3,7 @@ import { compararProdutos, type ResultadoComparacao } from "../../components/ser
 import style from "./Comparação.module.css";
 
 export default function Comparador() {
+  const [tipopeça, settipo] = useState (gpu);
   const [produtoA, setProdutoA] = useState("rtx-4060");
   const [produtoB, setProdutoB] = useState("rx-7600");
   const [resultado, setResultado] = useState<ResultadoComparacao | null>(null);
@@ -35,6 +36,11 @@ export default function Comparador() {
       <h1>Comparador de Peças</h1>
 
       <section>
+        <div>
+          <select value={tipopeça} name="Tipo de peça" onChange={(e) => setProdutoA(e.target.value)}>
+
+          </select>
+        </div>
         <div className={`${style.areaSelects} ${style.campoSelect}`}>
 
            <label>Primeira peça</label>
