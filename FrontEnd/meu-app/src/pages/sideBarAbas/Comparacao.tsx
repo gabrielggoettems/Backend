@@ -31,13 +31,11 @@ export default function Comparador() {
 
   return (
     <main>
+      
       <h1>Comparador de Peças</h1>
 
-     
-      
-
       <section>
-        <div className={style.alinhar}>
+        <div className={`${style.areaSelects} ${style.campoSelect}`}>
 
            <label>Primeira peça</label>
           
@@ -49,7 +47,7 @@ export default function Comparador() {
 
         </div>
 
-        <div className={style.alinhar2}>
+        <div className={`${style.areaSelects} ${style.campoSelect}`}>
 
           <label>Segunda peça</label>
 
