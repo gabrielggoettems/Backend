@@ -73,4 +73,28 @@ export const produtos: ProdutoInterface[] =[
       memoria: "DDR5",
     },
   },
+  {
+  id: "rx-7600",
+  nome: "AMD Radeon RX 7600",
+  categoria: "gpu",
+  Marca: "AMD",
+  price: 1799.9,
+  potencia: 76,
+  detalhes: {
+    memoria: "8 GB GDDR6",
+    interface: "PCIe 4.0",
+  },
+},
+{
+  id: "gtx-1660",
+  nome: "NVIDIA GeForce GTX 1660",
+  categoria: "gpu",
+  Marca: "NVIDIA",
+  price: 999.9,
+  potencia: 48,
+  detalhes: {
+    memoria: "6 GB GDDR5",
+    interface: "PCIe 3.0",
+  },
+},
 ];
