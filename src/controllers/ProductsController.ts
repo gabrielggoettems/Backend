@@ -6,11 +6,22 @@ const produtoService = new ProdutoService();
 export function getListarProdutos(req: Request, res: Response) {
   const pesquisar = req.query.pesquisar as string;
 
-  if (!pesquisar?.trim()) {
-    return res.status(200).json(produtoService.buscarTodosProdutos());
+  if (pesquisar == null || pesquisar === "") {
+    return res.status(200).json(
+      produtoService.buscarTodosProdutos()
+    );
   }
 
-  const produtos = produtoService.buscarProdutosPorNome(pesquisar);
+  return res.status(200).json(
+    produtoService.buscarProdutosPorNome(String(pesquisar))
+  );
+}
 
-  return res.status(200).json(produtos);
+export function criarProduto(req: Request, res: Response) {
+  const produto = req.body;
+
+  const novoProduto = produtoService.criarProduto(produto);
+
+  return res.status(201).json(novoProduto);
+
 }
