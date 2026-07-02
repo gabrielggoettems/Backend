@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { AuthService } from "../services/AuthService";
-import { InterfaceCadastro } from "../interfaces/Cadastro";
+import { InterfaceCadastro } from "../interfaces/Register";
 
 export class AuthController {
 

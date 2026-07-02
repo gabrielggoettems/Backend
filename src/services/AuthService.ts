@@ -1,5 +1,5 @@
-import { InterfaceCadastro } from "../interfaces/Cadastro";
-import { RetornoInterface } from "../interfaces/Retorno";
+import { InterfaceCadastro } from "../interfaces/Register";
+import { RetornoInterface } from "../interfaces/Return";
 
 export class AuthService {
   async cadastro(dados: InterfaceCadastro): Promise<RetornoInterface> {

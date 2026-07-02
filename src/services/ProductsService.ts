@@ -1,5 +1,5 @@
 import { produtos } from "../data/ProdutoMock";
-import { ProdutoInterface } from "../interfaces/Produtos";
+import { ProdutoInterface } from "../interfaces/Products";
 
 export class ProdutoService{
 

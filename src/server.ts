@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import authRoutes from "./routes/authRoute";
-import produtoRoutes from "./routes/ProdutoRoute";
+import produtoRoutes from "./routes/ProductsRoute";
 
 const app = express();
 const PORT = 3000;
