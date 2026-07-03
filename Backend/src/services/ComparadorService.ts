@@ -1,6 +1,8 @@
 import { produtos } from "../data/ProdutoMock";
-
 export class ComparadorService {
+  tipo(tipo:string) {
+    const tipoitem = produtos.find((produto) => produto.categoria === tipo);
+  }
   comparar(codigoA: string, codigoB: string) {
     const produtoA = produtos.find((produto) => produto.id === codigoA);
     const produtoB = produtos.find((produto) => produto.id === codigoB);
