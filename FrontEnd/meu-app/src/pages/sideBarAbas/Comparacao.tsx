@@ -5,8 +5,8 @@ import style from "./Comparação.module.css";
 export default function Comparador() {
   const [produtos, setProdutos] = useState<ProdutoComparacao[]>([]);
   const [categoriaSelecionada, setCategoriaSelecionada] = useState("gpu");
-  const [produtoA, setProdutoA] = useState("rx 7600");
-  const [produtoB, setProdutoB] = useState("rtx 4060");
+  const [produtoA, setProdutoA] = useState("");
+  const [produtoB, setProdutoB] = useState("");
   const [resultado, setResultado] = useState<ResultadoComparacao | null>(null);
   const [erro, setErro] = useState("");
   const [loading, setLoading] = useState(false);
@@ -74,7 +74,7 @@ export default function Comparador() {
       <section>
         
         <div className={`${style.areaSelects} ${style.campoSelect}`}>
-          
+
           <label>Categoria:</label>
 
            <select value={categoriaSelecionada} onChange={mudarCategoria} className= {style.espaço}>
