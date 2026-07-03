@@ -80,7 +80,7 @@ export class AuthService {
       };
     }
 
-    // Procura o usuário no banco (pode ser por nome ou email)
+
     const usuarioEncontrado = usuario.find(
       u => (u.nome === user || u.email === user) && u.senha === senha
     );
