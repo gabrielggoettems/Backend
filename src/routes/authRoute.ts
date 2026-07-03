@@ -8,4 +8,12 @@ routes.post("/cadastro", (req, res) => {
   return authController.cadastro(req, res);
 });
 
+routes.post("/EfetuarCadastro", (req, res) => {
+  return authController.cadastro(req, res);
+});
+
+routes.post("/efetuarLogin", (req, res) => {
+  return authController.login(req, res);
+});
+
 export default routes;

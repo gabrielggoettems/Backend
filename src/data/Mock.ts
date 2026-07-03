@@ -34,7 +34,7 @@
   },
 ];
 export const dadosValidosDeLogin = {
-  "User": "Gabriel",
+  "User": "Admin",
   "Senha": "123456"
 }
 
