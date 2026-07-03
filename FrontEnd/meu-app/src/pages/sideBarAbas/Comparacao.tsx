@@ -1,17 +1,53 @@
-import { useState } from "react";
-import { compararProdutos, type ResultadoComparacao } from "../../components/services/comparador";
+import { useEffect, useState, type ChangeEvent } from "react";
+import {compararProdutos, listarProdutos, type ProdutoComparacao, type ResultadoComparacao,} from "../../components/services/comparador";
 import style from "./Comparação.module.css";
 
 export default function Comparador() {
-  const [produtoA, setProdutoA] = useState("rtx-4060");
-  const [produtoB, setProdutoB] = useState("rx-7600");
+  const [produtos, setProdutos] = useState<ProdutoComparacao[]>([]);
+  const [categoriaSelecionada, setCategoriaSelecionada] = useState("gpu");
+  const [produtoA, setProdutoA] = useState("rx 7600");
+  const [produtoB, setProdutoB] = useState("rtx 4060");
   const [resultado, setResultado] = useState<ResultadoComparacao | null>(null);
   const [erro, setErro] = useState("");
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    async function carregarProdutos() {
+      try {
+        const dados = await listarProdutos();
+        setProdutos(dados);
+      } catch (error) {
+        setErro("Erro ao carregar produtos.");
+      }
+    }
+
+    carregarProdutos();
+  }, []);
+
+  const produtosFiltrados = produtos.filter(
+    (produto) => produto.categoria === categoriaSelecionada
+  );
+
+  function mudarCategoria(e: ChangeEvent<HTMLSelectElement>) {
+    const novaCategoria = e.target.value;
+
+    setCategoriaSelecionada(novaCategoria);
+    setResultado(null);
+    setErro("");
+
+    const produtosDaCategoria = produtos.filter(
+      (produto) => produto.categoria === novaCategoria
+    );
+
+    setProdutoA(produtosDaCategoria[0]?.codigo || "");
+    setProdutoB(
+      produtosDaCategoria[1]?.codigo || produtosDaCategoria[0]?.codigo || ""
+    );
+  }
+
   async function handleComparar() {
     try {
-      setLoading(true);
+      setLoading(true); 
       setErro("");
       setResultado(null);
 
@@ -24,6 +60,7 @@ export default function Comparador() {
           ? error.message
           : "Erro desconhecido ao comparar."
       );
+      
     } finally {
       setLoading(false);
     }
@@ -33,16 +70,33 @@ export default function Comparador() {
     <main>
       
       <h1>Comparador de Peças</h1>
-
+      
       <section>
+        
         <div className={`${style.areaSelects} ${style.campoSelect}`}>
-
-           <label>Primeira peça</label>
           
-          <select value={produtoA} onChange={(e) => setProdutoA(e.target.value)}>
-            <option value="rtx-4060">RTX 4060</option>
-            <option value="rx-7600">RX 7600</option>
-            <option value="gtx-1660">GTX 1660</option>
+          <label>Categoria:</label>
+
+           <select value={categoriaSelecionada} onChange={mudarCategoria} className= {style.espaço}>
+          <option value="gpu">GPU</option>
+          <option value="cpu">CPU</option>
+          <option value="ram">Memória ram</option>
+          <option value="psu">Fonte</option>
+          <option value="motherboard">Placa mãe</option>
+        </select>
+
+          <label>Primeira peça</label>
+
+          <select
+            value={produtoA}
+            onChange={(e) => setProdutoA(e.target.value)}
+            disabled={!categoriaSelecionada}
+          >
+            {produtosFiltrados.map((produto) => (
+              <option key={produto.codigo} value={produto.codigo}>
+                {produto.nome}
+              </option>
+            ))}
           </select>
 
         </div>
@@ -51,10 +105,16 @@ export default function Comparador() {
 
           <label>Segunda peça</label>
 
-          <select value={produtoB} onChange={(e) => setProdutoB(e.target.value)}>
-            <option value="rtx-4060">RTX 4060</option>
-            <option value="rx-7600">RX 7600</option>
-            <option value="gtx-1660">GTX 1660</option>
+          <select
+            value={produtoB}
+            onChange={(e) => setProdutoB(e.target.value)}
+            disabled={!categoriaSelecionada}
+          >
+            {produtosFiltrados.map((produto) => (
+              <option key={produto.codigo} value={produto.codigo}>
+                {produto.nome}
+              </option>
+            ))}
           </select>
 
         </div>
