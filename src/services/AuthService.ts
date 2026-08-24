@@ -1,18 +1,26 @@
 import { InterfaceCadastro } from "../interfaces/Register";
 import { RetornoInterface } from "../interfaces/Return";
 import { usuario } from "../data/Mock";
+import { gerarToken } from "../server";
 
 export class AuthService {
   async cadastro(dados: InterfaceCadastro): Promise<RetornoInterface> {
-    // Validar campos obrigatórios
-    if (!dados.user || !dados.senha || !dados.email || !dados.Telefone || !dados.DataNascimento || !dados.genero || !dados.confirmarSenha) {
+
+    if (
+      !dados.user ||
+      !dados.senha ||
+      !dados.email ||
+      !dados.Telefone ||
+      !dados.DataNascimento ||
+      !dados.genero ||
+      !dados.confirmarSenha
+    ) {
       return {
         sucesso: false,
         mensagem: "Preencha todos os campos",
       };
     }
 
-    // Validar se aceitou os termos
     if (!dados.termos) {
       return {
         sucesso: false,
@@ -20,7 +28,6 @@ export class AuthService {
       };
     }
 
-    // Validar se as senhas conferem
     if (dados.senha !== dados.confirmarSenha) {
       return {
         sucesso: false,
@@ -28,8 +35,8 @@ export class AuthService {
       };
     }
 
-    // Validar formato de email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
     if (!emailRegex.test(dados.email)) {
       return {
         sucesso: false,
@@ -37,7 +44,6 @@ export class AuthService {
       };
     }
 
-    // Validar senha mínima
     if (dados.senha.length < 6) {
       return {
         sucesso: false,
@@ -45,8 +51,11 @@ export class AuthService {
       };
     }
 
-    // Verificar se usuário já existe
-    const usuarioExistente = usuario.some(u => u.email === dados.email);
+
+    const usuarioExistente = usuario.some(
+      (u) => u.email === dados.email
+    );
+
     if (usuarioExistente) {
       return {
         sucesso: false,
@@ -54,7 +63,7 @@ export class AuthService {
       };
     }
 
-    // Salvar novo usuário
+
     const novoUsuario = {
       codigo: usuario.length + 1,
       nome: dados.user,
@@ -64,6 +73,7 @@ export class AuthService {
       confirmarSenha: dados.confirmarSenha,
     };
 
+
     usuario.push(novoUsuario);
 
     return {
@@ -72,7 +82,12 @@ export class AuthService {
     };
   }
 
-  async login(user: string, senha: string): Promise<RetornoInterface> {
+  async login(
+    user: string,
+    senha: string
+  ): Promise<RetornoInterface> {
+
+ 
     if (!user || !senha) {
       return {
         sucesso: false,
@@ -80,11 +95,13 @@ export class AuthService {
       };
     }
 
-    // Procura o usuário no banco (pode ser por nome ou email)
     const usuarioEncontrado = usuario.find(
-      u => (u.nome === user || u.email === user) && u.senha === senha
+      (u) =>
+        (u.nome === user || u.email === user) &&
+        u.senha === senha
     );
 
+    
     if (!usuarioEncontrado) {
       return {
         sucesso: false,
@@ -92,9 +109,15 @@ export class AuthService {
       };
     }
 
+ 
+    const token = gerarToken(usuarioEncontrado.codigo);
+
+ 
     return {
       sucesso: true,
       mensagem: "Login efetuado com sucesso",
+      token: token
+      
     };
   }
 }
