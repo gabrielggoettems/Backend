@@ -2,6 +2,7 @@ import { ProdutoInterface } from "../interfaces/Products";
 
 export const produtos: ProdutoInterface[] =[
   {
+    img:"C:\projetosVscpde\FrontEnd\meu-app\src\pages\public\imagensprodutos",
     id: "rtx-4060",
     nome: "NVIDIA GeForce RTX 4060",
     categoria: "gpu",
