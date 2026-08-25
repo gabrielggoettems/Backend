@@ -13,6 +13,7 @@ export const produtos: ProdutoInterface[] =[
     },
   },
   {
+    img: "https://www.amd.com/system/files/2023-05/ryzen-5-7600-600x600.png",
     id: "ryzen-5-7600",
     nome: "AMD Ryzen 5 7600",
     categoria: "cpu",

@@ -4,6 +4,7 @@ export interface ProdutoInterface {
     categoria: string;
     Marca: string;
     price: number;
+    img?: string;
     detalhes: {
         [key: string]: string | number;
     };
