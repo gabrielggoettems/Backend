@@ -2,6 +2,7 @@ import { InterfaceCadastro } from "../interfaces/Register";
 import { RetornoInterface } from "../interfaces/Return";
 import { usuario } from "../data/Mock";
 import { gerarToken } from "../server";
+import { buscaUsuarioPorNomeSenha } from "../repository/AuthRepository";
 
 export class AuthService {
   async cadastro(dados: InterfaceCadastro): Promise<RetornoInterface> {
@@ -95,13 +96,9 @@ export class AuthService {
       };
     }
 
-    const usuarioEncontrado = usuario.find(
-      (u) =>
-        (u.nome === user || u.email === user) &&
-        u.senha === senha
-    );
-
+    const usuarioEncontrado = await buscaUsuarioPorNomeSenha(user, senha);
     
+     
     if (!usuarioEncontrado) {
       return {
         sucesso: false,
@@ -110,7 +107,7 @@ export class AuthService {
     }
 
  
-    const token = gerarToken(usuarioEncontrado.codigo);
+    const token = gerarToken(usuarioEncontrado.id);
 
  
     return {
