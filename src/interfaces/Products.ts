@@ -1,5 +1,4 @@
 export interface ProdutoInterface {
-    img?: string;
     id: string;
     nome: string;
     categoria: string;

@@ -1,7 +1,7 @@
 import { InterfaceCadastro } from "../interfaces/Register";
 import { RetornoInterface } from "../interfaces/Return";
 import { usuario } from "../data/Mock";
-import { gerarToken } from "../server";
+import { gerarToken } from "../jwt/jwt";
 import { buscaUsuarioPorNomeSenha } from "../repository/AuthRepository";
 
 export class AuthService {
