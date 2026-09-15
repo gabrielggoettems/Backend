@@ -14,14 +14,11 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use("/login", authRoutes);
-
-app.use("/login", authRoutes);
 app.use("/produto", produtoRoutes);
 
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
 });
-
 app.get("/", (req, res) => {
   res.send("Servidor rodando");   
 });
