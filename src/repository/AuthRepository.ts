@@ -7,14 +7,14 @@ export interface NovoUsuario {
   senhaHash: string;
   telefone: string;
   dataNascimento: string;
-  tipoUsuario?: number;
+  cdTipoUsuario: number;
 }
 
 export async function buscaUsuarioPorNome(
   nome: string,
 ): Promise<IUser | undefined> {
   const { rows } = await bancoDados.query<IUser>(
-    "select id_usuario, tx_nome, tx_email, tx_senha, tx_telefone, dt_datanascimento, cd_tipousuario from tb_usuario where tx_nome = $1;",
+    "select cd_usuario, tx_nome, tx_senha from tb_usuario where tx_nome = $1;",
     [nome],
   );
 
@@ -23,9 +23,9 @@ export async function buscaUsuarioPorNome(
 
 export async function buscaUsuarioPorEmail(
   email: string,
-): Promise<{ id_usuario: number } | undefined> {
+): Promise<{ cd_usuario: number } | undefined> {
   const { rows } = await bancoDados.query(
-    "select id_usuario from tb_usuario where tx_email = $1;",
+    "select cd_usuario from tb_usuario where tx_email = $1;",
     [email],
   );
 
@@ -34,9 +34,9 @@ export async function buscaUsuarioPorEmail(
 
 export async function buscaUsuarioPorCodigo(
   codigo: number,
-): Promise<{ id_usuario: number } | undefined> {
+): Promise<{ cd_usuario: number } | undefined> {
   const { rows } = await bancoDados.query(
-    "select id_usuario from tb_usuario where id_usuario = $1;",
+    "select cd_usuario from tb_usuario where cd_usuario = $1;",
     [codigo],
   );
 
@@ -48,16 +48,16 @@ export async function cadastraUsuario(dados: NovoUsuario): Promise<number> {
     `insert into tb_usuario
        (tx_nome, tx_email, tx_senha, tx_telefone, dt_datanascimento, cd_tipousuario)
      values ($1, $2, $3, $4, $5, $6)
-     returning id_usuario;`,
+     returning cd_usuario;`,
     [
       dados.nome,
       dados.email,
       dados.senhaHash,
       dados.telefone,
       dados.dataNascimento,
-      dados.tipoUsuario ?? 1,
+      dados.cdTipoUsuario,
     ],
   );
 
-  return rows[0].id_usuario;
+  return rows[0].cd_usuario;
 }

@@ -13,8 +13,6 @@ const SENHA_MINIMA = 8;
 const SENHA_MAXIMA_BYTES = 72; // limite do bcrypt
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-// Hash falso para gastar o mesmo tempo quando o usuário não existe
-// (evita descobrir usuários existentes pelo tempo de resposta).
 const HASH_FALSO = bcrypt.hashSync("senha-falsa", SALT_ROUNDS);
 
 function dataNascimentoValida(valor: string): boolean {
@@ -89,10 +87,9 @@ export class AuthService {
         senhaHash,
         telefone: dados.Telefone,
         dataNascimento: dados.DataNascimento,
-        tipoUsuario: 1,
+        cdTipoUsuario: 1,
       });
     } catch (erro: any) {
-      // 23505 = violação de unique (requisições simultâneas)
       if (erro?.code === "23505") {
         return {
           sucesso: false,
@@ -121,7 +118,7 @@ export class AuthService {
       return { sucesso: false, mensagem: "Usuário ou senha incorretos" };
     }
 
-    const token = gerarToken(usuarioEncontrado.id_usuario);
+    const token = gerarToken(usuarioEncontrado.cd_usuario);
 
     return {
       sucesso: true,
