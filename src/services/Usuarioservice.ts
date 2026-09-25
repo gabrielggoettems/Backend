@@ -5,20 +5,18 @@ const repository = new UsuarioRepository();
 
 export class UsuarioService {
   async salvar(nome: string): Promise<RetornoInterface> {
-    const existe = await repository.validarNomeUsuario(nome);
-
-    if (existe) {
-      return {
-        sucesso: false,
-        mensagem: "Nome ja cadastrado",
-      };
+    if (!nome || !nome.trim()) {
+      return { sucesso: false, mensagem: "Informe o nome" };
     }
 
-    await repository.salvarNomeUsuario(nome);
+    const nomeLimpo = nome.trim();
 
-    return {
-      sucesso: true,
-      mensagem: "Usuario cadastrado com sucesso",
-    };
+    if (await repository.validarNomeUsuario(nomeLimpo)) {
+      return { sucesso: false, mensagem: "Nome já cadastrado" };
+    }
+
+    await repository.salvar(nomeLimpo);
+
+    return { sucesso: true, mensagem: "Usuário cadastrado com sucesso" };
   }
 }

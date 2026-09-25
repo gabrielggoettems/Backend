@@ -16,7 +16,15 @@ routes.post("/EfetuarCadastro", (req, res) => {
   return authController.cadastro(req, res);
 });
 
+routes.post("/efetuarCadastro", (req, res) => {
+  return authController.cadastro(req, res);
+});
+
 routes.post("/efetuarLogin", (req, res) => {
+  return authController.login(req, res);
+});
+
+routes.post("/login", (req, res) => {
   return authController.login(req, res);
 });
 
