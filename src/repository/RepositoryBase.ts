@@ -1,13 +1,9 @@
 import { bancoDados } from "../database/pool";
 
-// ── Contrato mínimo de uma entidade do banco ─────────
+
 interface IEntidade {
   id: number;
 }
-
-// ── Classe genérica com constraint ──────────────────
-// "T extends IEntidade" = T pode ser qualquer tipo,
-// desde que tenha pelo menos a propriedade "id: number"
 class RepositorioBase<T extends IEntidade> {
   private tabela: string;
 

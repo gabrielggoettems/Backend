@@ -15,7 +15,7 @@ export class UsuarioService {
       return { sucesso: false, mensagem: "Nome já cadastrado" };
     }
 
-    await repository.salvar(nomeLimpo);
+    //await repository.salvar(nomeLimpo);
 
     return { sucesso: true, mensagem: "Usuário cadastrado com sucesso" };
   }

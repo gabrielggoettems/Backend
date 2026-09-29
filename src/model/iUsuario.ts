@@ -1,5 +1,5 @@
 export interface IUsuario {
-    id_usuario: number;
+    id_usuario?: number;
     tx_nome: string;
     tx_email: string;
     tx_senha: string;

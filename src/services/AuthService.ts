@@ -7,6 +7,9 @@ import {
   buscaUsuarioPorNome,
   cadastraUsuario,
 } from "../repository/AuthRepository";
+import { usuario } from "../data/Mock";
+import { UsuarioRepository } from "../repository/UsuarioRepository";
+import { IUsuario } from "../model/iUsuario";
 
 const SALT_ROUNDS = 10;
 const SENHA_MINIMA = 8;
@@ -20,6 +23,7 @@ function dataNascimentoValida(valor: string): boolean {
   return !isNaN(data.getTime()) && data <= new Date();
 }
 
+const repository = new UsuarioRepository();
 export class AuthService {
   async cadastro(dados: InterfaceCadastro): Promise<RetornoInterface> {
     if (
@@ -81,14 +85,16 @@ export class AuthService {
     const senhaHash = await bcrypt.hash(dados.senha, SALT_ROUNDS);
 
     try {
-      await cadastraUsuario({
-        nome,
-        email,
-        senhaHash,
-        telefone: dados.Telefone,
-        dataNascimento: dados.DataNascimento,
-        cdTipoUsuario: 1,
-      });
+      const novoUsuario: IUsuario = {
+        tx_nome: nome,
+        tx_email: email,
+        tx_senha: senhaHash,
+        tx_telefone: dados.Telefone,
+        dt_datanascimento: dados.DataNascimento,
+        cd_tipousuario: 1,
+      };
+
+      await repository.salvar(novoUsuario);
     } catch (erro: any) {
       if (erro?.code === "23505") {
         return {
