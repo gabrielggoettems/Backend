@@ -7,7 +7,7 @@ export class ProdutoService {
       `select cd_produto as codigo, tx_nome as nome, tx_categoria as categoria,
               tx_marca as marca, nr_preco as valor, nr_estoque as estoque,
               tx_imagem as imagem, tx_detalhes as detalhes
-       from tb_produto order by tx_nome;`,
+       from tb_produto_catalogo order by tx_nome;`,
     );
     return rows;
   }
@@ -17,7 +17,7 @@ export class ProdutoService {
       `select cd_produto as codigo, tx_nome as nome, tx_categoria as categoria,
               tx_marca as marca, nr_preco as valor, nr_estoque as estoque,
               tx_imagem as imagem, tx_detalhes as detalhes
-       from tb_produto where tx_nome ilike $1 order by tx_nome;`,
+       from tb_produto_catalogo where tx_nome ilike $1 order by tx_nome;`,
       [`%${pesquisa}%`],
     );
     return rows;
@@ -25,7 +25,7 @@ export class ProdutoService {
 
   async criarProduto(produto: ProdutoInterface) {
     const { rows } = await bancoDados.query(
-      `insert into tb_produto
+      `insert into tb_produto_catalogo
         (cd_produto, tx_nome, tx_categoria, tx_marca, nr_preco, nr_estoque, tx_imagem, tx_detalhes)
        values ($1, $2, $3, $4, $5, $6, $7, $8)
        returning cd_produto as codigo, tx_nome as nome, tx_categoria as categoria,
@@ -37,10 +37,10 @@ export class ProdutoService {
     return rows[0];
   }
 
-  async removerProduto(codigo: string, nome: string) {
+  async removerProduto(codigo: string) {
     const resultado = await bancoDados.query(
-      "delete from tb_produto where cd_produto = $1 and lower(tx_nome) = lower($2);",
-      [codigo, nome],
+      "delete from tb_produto_catalogo where cd_produto = $1;",
+      [codigo],
     );
     return (resultado.rowCount ?? 0) > 0;
   }

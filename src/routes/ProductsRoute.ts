@@ -11,5 +11,6 @@ const router = Router();
 router.get("/produtos", getListarProdutos);
 router.post("/saveProdutos", criarProduto);
 router.delete("/produtos", deletarProduto);
+router.delete("/produtos/:codigo", deletarProduto);
 
 export default router;

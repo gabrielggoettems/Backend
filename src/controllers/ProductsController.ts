@@ -20,9 +20,10 @@ export async function criarProduto(req: Request, res: Response) {
   const { id, codigo, nome, categoria, marca, Marca, price, valor, estoque, imagem, img, detalhes } = req.body ?? {};
   const codigoProduto = String(codigo ?? id ?? "").trim();
   const preco = Number(price ?? valor);
+  const quantidadeEstoque = Number(estoque ?? 0);
   if (!codigoProduto || !String(nome ?? "").trim() || !String(categoria ?? "").trim() ||
-      !String(marca ?? Marca ?? "").trim() || !Number.isFinite(preco) || preco <= 0) {
-    return res.status(400).json({ mensagem: "Informe código, nome, categoria, marca e preço válido." });
+      !String(marca ?? Marca ?? "").trim() || !Number.isFinite(preco) || preco <= 0 || !Number.isInteger(quantidadeEstoque) || quantidadeEstoque < 0) {
+    return res.status(400).json({ mensagem: "Informe código, nome, categoria, marca, preço válido e estoque inteiro não negativo." });
   }
 
   try {
@@ -32,7 +33,7 @@ export async function criarProduto(req: Request, res: Response) {
       categoria: String(categoria).trim(),
       marca: String(marca ?? Marca).trim(),
       price: preco,
-      estoque: Number(estoque ?? 0),
+      estoque: quantidadeEstoque,
       imagem: imagem ?? img,
       detalhes: detalhes ?? {},
     });
@@ -48,14 +49,13 @@ export async function criarProduto(req: Request, res: Response) {
 }
 
 export async function deletarProduto(req: Request, res: Response) {
-  const codigo = String(req.body?.codigo ?? "").trim();
-  const nome = String(req.body?.nome ?? "").trim();
-  if (!codigo || !nome) {
-    return res.status(400).json({ mensagem: "Informe o código e o nome do produto." });
+  const codigo = String(req.params.codigo ?? req.body?.codigo ?? "").trim();
+  if (!codigo) {
+    return res.status(400).json({ mensagem: "Informe o código do produto." });
   }
   try {
-    const removido = await produtoService.removerProduto(codigo, nome);
-    if (!removido) return res.status(404).json({ mensagem: "Produto não encontrado com esse código e nome." });
+    const removido = await produtoService.removerProduto(codigo);
+    if (!removido) return res.status(404).json({ mensagem: "Produto não encontrado." });
     return res.status(200).json({ mensagem: "Produto removido da loja." });
   } catch (error) {
     console.error("Erro ao remover produto:", error);

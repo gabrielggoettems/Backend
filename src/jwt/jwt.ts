@@ -12,7 +12,6 @@ export function gerarToken(codigoUsuario: number): string {
   });
 }
 
-/** Retorna o código do usuário se o token for válido, ou null. */
 export function validarToken(token: string): number | null {
   try {
     const dados = jwt.verify(token, SENHA_JWT, { algorithms: ["HS256"] });
